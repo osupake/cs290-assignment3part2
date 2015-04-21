@@ -1,0 +1,16 @@
+fieldset {
+	display: inline-block;
+	width: 400px;
+}
+
+.button-align {
+	text-align: center;
+}
+
+ul {
+	padding-left: 0px;
+}
+
+li {
+	list-style: none;
+}
