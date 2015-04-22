@@ -7,24 +7,26 @@
 	<script src="gist.js"></script>
 </head>
 <body>
-	<form>
-		<fieldset>
-			<label>How many pages of results do you want to see? (1 to 5)</label>
-			<ul>
-				<li><input type="number" name="pages" min="1" max="5" value="1"></li>
-			</ul>
-			<label>Choose languages to be included in the search:</label>
-			<ul>
-				<li><input type="checkbox" name="python" value="python">Python</li>
-				<li><input type="checkbox" name="json" value="json">JSON</li>
-				<li><input type="checkbox" name="javascript" value="javascript">JavaScript</li>
-				<li><input type="checkbox" name="sql" value="sql">SQL</li>
-			</ul>	
-			<div class="button-align">
-				<input type="submit" value="Search" onclick="gists()">
-			</div>				
-		</fieldset>
-	</form>
+	<fieldset>
+		<label>How many pages of results do you want to see? (1 to 5)</label>
+		<select name="pages" id="pages">
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+		</select>
+		<label>Choose languages to be included in the search:</label>
+		<ul>
+			<li><input type="checkbox" name="python" value="python">Python</li>
+			<li><input type="checkbox" name="json" value="json">JSON</li>
+			<li><input type="checkbox" name="javascript" value="javascript">JavaScript</li>
+			<li><input type="checkbox" name="sql" value="sql">SQL</li>
+		</ul>	
+		<div class="button-align">
+			<input type="submit" value="Search" onclick="gists()">
+		</div>				
+	</fieldset>
 
 	<div id="results"></div>
 
