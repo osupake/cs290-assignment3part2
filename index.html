@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="main.css">
 	<title>Eugene Pak | CS290 Assignment 3 - Part 2</title>
-	<script src="gist.js"></script>
 </head>
 <body>
 	<fieldset>
-		<label>How many pages of results do you want to see? (1 to 5)</label>
+		<label>How many pages of results do you want to see? </label>
+		<p>
 		<select name="pages" id="pages">
 			<option value="1">1</option>
 			<option value="2">2</option>
@@ -16,12 +16,13 @@
 			<option value="4">4</option>
 			<option value="5">5</option>
 		</select>
-		<label>Choose languages to be included in the search:</label>
+		</p>
+		<label>Select languages to filter out:</label>
 		<ul>
-			<li><input type="checkbox" name="languages" value="python">Python</li>
-			<li><input type="checkbox" name="languages" value="json">JSON</li>
-			<li><input type="checkbox" name="languages" value="javascript">JavaScript</li>
-			<li><input type="checkbox" name="languages" value="sql">SQL</li>
+			<li><input type="checkbox" id="python" value="python">Python</li>
+			<li><input type="checkbox" id="json" value="json">JSON</li>
+			<li><input type="checkbox" id="js" value="js">JavaScript</li>
+			<li><input type="checkbox" id="sql" value="sql">SQL</li>
 		</ul>	
 		<div class="button-align">
 			<input type="submit" value="Search" onclick="startGists()">
@@ -29,6 +30,6 @@
 	</fieldset>
 
 	<div id="results"></div>
-
+	<script src="gist.js"></script>
 </body>
 </html>
