@@ -1,3 +1,5 @@
+var faves = [];
+
 function gist(description, url, language) {
 	this.description = description;
 	this.url = url;
@@ -55,44 +57,6 @@ function setFilteredLanguages() { //create array of filtered languages
 	return filteredLanguages;
 }
 
-/*
-function showGists(gist) { //create ordered list
-	var resultsList = '<ol id="list">';
-	var languages = setFilteredLanguages();
-	//console.log(languages);
-
-	for(var i=0; i < gist.length; i++) {
-		if(languages.indexOf(gist[i].language) >= 0) { //skip if language is filtered
-			continue;
-		}
-		if(gist[i].description === null || gist[i].description.length === 0) { //blank descriptions changes to 'No Description'
-			gist[i].description = 'No Description';
-		}
-		resultsList += '<li>';
-		resultsList += '<a href="' + gist[i].url + '">' + gist[i].description + '</a>';
-
-		var button = document.createElement('button');
-   	 	var buttonTxt = document.createTextNode('+');
-   		button.setAttribute('onclick', saveFavorite());
-   		button.appendChild(buttonTxt);
-   		var li = document.createElement('div');
-   		li.appendChild(button);
-
-		var list = document.getElementById('list');
-		var button = document.createElement('button');
-		button.type = 'button';
-		button.appendChild(document.createTextNode('+'));
-		list.appendChild(button);
-		resultsList += '</li>';
-
-	}
-
-	resultsList += '</ol>';
-	
-	document.getElementById('results').innerHTML = resultsList;
-}
-*/
-
 function showGists(gist) { //create ordered list
 	var list = document.getElementById('list');
 	var languages = setFilteredLanguages();
@@ -110,17 +74,68 @@ function showGists(gist) { //create ordered list
 		link.href = gist[i].url;
 		entry.appendChild(link);
 		list.appendChild(entry);
-
-		var button = document.createElement('button');
-		button.type = 'button';
-		button.appendChild(document.createTextNode('+'));
-		button.setAttribute('onclick', saveFavorite(gist[i].url, gist[i].description));
-		list.appendChild(button);
+/*
+		var addFave = document.createElement('button');
+		addFave.type = 'button';
+		addFave.name = '<a href="' + link.href + '>' + gist[i].description + '</a>';
+		addFave.appendChild(document.createTextNode('+'));
+		addFave.onclick = function() {
+			saveFavorite(this.name);
+		}
+		list.appendChild(addFave);
+*/
+		var addFave = document.createElement('button');
+		addFave.type = 'button';
+		addFave.name = link.href
+		addFave.value =  gist[i].description;
+		addFave.appendChild(document.createTextNode('+'));
+		addFave.onclick = function() {
+			saveFavorite(this.name, this.value);
+		}
+		list.appendChild(addFave);
+		
 	}
+
+}
+
+function faveItem(url, description) {
+	this.url = url;
+	this.description = description;
 }
 
 function saveFavorite(url, description) {
-	var a = {favorites: [url, description]};
-	//console.log(gist.description);
-	localStorage.setItem('session', JSON.stringify(a));
+	//console.log(link);
+	var newFave = new faveItem(url, description);
+	//faves.push(newGist);
+	faves.push(newFave);
+	localStorage.setItem('favorites', JSON.stringify(faves));
+}
+
+function listFavorites(faveArray) {
+	var list = document.getElementById('favoriteList');
+	for(var i=0; i < faveArray.length; i++) {
+		var entry = document.createElement('li');
+		console.log(faveArray[i]);
+		var link = document.createElement('a');
+		link.appendChild(document.createTextNode(faveArray[i].description));
+		link.href = faveArray[i].url;
+		entry.appendChild(link);
+		list.appendChild(entry);
+
+		var rmFave = document.createElement('button');
+		rmFave.type = 'button';
+		rmFave.appendChild(document.createTextNode('-'));
+		rmFave.onclick = function() {
+			console.log(faveArray);
+			//this.parentNode.removeChild(entry);
+			//this.parentNode.removeChild(this);
+	}
+	list.appendChild(rmFave);
+	}
+}
+
+window.onload = function() {
+	var faveArray= JSON.parse(localStorage.getItem('favorites'));
+	listFavorites(faveArray);
+	//document.getElementById('displayFavorites').innerHTML = faveArray[i];
 }
