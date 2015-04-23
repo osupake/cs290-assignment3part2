@@ -1,3 +1,9 @@
+function gist(description, url, language) {
+	this.description = description;
+	this.url = url;
+	this.language = language;
+}
+
 function startGists() {
 	var pages = 1;
 	var pageNum = document.getElementsByName('pages')[0].value;
@@ -6,13 +12,22 @@ function startGists() {
 	for(var i=1; i <= pageNum; i++) {
 		var url = 'https://api.github.com/gists?page=' + pages + '&per_page=30';
 		var xhr = new XMLHttpRequest();
-		xhr.onreadystatechange = function () {
+		xhr.onreadystatechange = function () { //callback function
 			if(this.readyState === 4 && this.status === 200) {
 				var response = JSON.parse(this.responseText);
 				//console.log(typeof response);
 				//console.log(response);
 				for (var i=0; i < response.length; i++) {
-					results.push(' <a href="' + response[i].html_url + '">' + response[i].description + '</a>');
+					var description = response[i].description;
+					var url = response[i].html_url;
+					var language;
+					for(var property in response[i].files) {
+				    	var filesObject = response[i].files[property];
+				    	language = filesObject.language;
+				    	//console.log(language);
+				    }
+				    var newGist = new gist(description, url, language);
+					results.push(newGist);
 				}
 			}
 			showGists(results);
@@ -23,13 +38,40 @@ function startGists() {
 	}
 }
 
-function showGists(array) {
+function setFilteredLanguages() { //create array of filtered languages
+	var filteredLanguages = [];
+	if(document.getElementById('Python').checked) {
+		filteredLanguages.push('Python');
+	}
+	if(document.getElementById('JSON').checked) {
+		filteredLanguages.push('JSON');
+	}
+	if(document.getElementById('JavaScript').checked) {
+		filteredLanguages.push('JavaScript');
+	}
+	if(document.getElementById('SQL').checked) {
+		filteredLanguages.push('SQL');
+	}
+	return filteredLanguages;
+}
+
+function showGists(gist) { //create ordered list
 	var resultsList = '<ol>';
-	for(var i=0; i < array.length; i++) {
+	var languages = setFilteredLanguages();
+	//console.log(languages);
+
+	for(var i=0; i < gist.length; i++) {
+		if(languages.indexOf(gist[i].language) >= 0) { //skip if language is filtered
+			continue;
+		}
+		if(gist[i].description === null || gist[i].description.length === 0) { //blank descriptions changes to 'No Description'
+			gist[i].description = 'No Description';
+		}
 		resultsList += '<li>';
-		resultsList += array[i];
+		resultsList += '<a href="' + gist[i].url + '">' + gist[i].description + '</a>';
 		resultsList += '</li>';
 	}
+
 	resultsList += '</ol>';
 	document.getElementById('results').innerHTML = resultsList;
 }
