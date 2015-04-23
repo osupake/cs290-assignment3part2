@@ -55,8 +55,9 @@ function setFilteredLanguages() { //create array of filtered languages
 	return filteredLanguages;
 }
 
+/*
 function showGists(gist) { //create ordered list
-	var resultsList = '<ol>';
+	var resultsList = '<ol id="list">';
 	var languages = setFilteredLanguages();
 	//console.log(languages);
 
@@ -69,9 +70,57 @@ function showGists(gist) { //create ordered list
 		}
 		resultsList += '<li>';
 		resultsList += '<a href="' + gist[i].url + '">' + gist[i].description + '</a>';
+
+		var button = document.createElement('button');
+   	 	var buttonTxt = document.createTextNode('+');
+   		button.setAttribute('onclick', saveFavorite());
+   		button.appendChild(buttonTxt);
+   		var li = document.createElement('div');
+   		li.appendChild(button);
+
+		var list = document.getElementById('list');
+		var button = document.createElement('button');
+		button.type = 'button';
+		button.appendChild(document.createTextNode('+'));
+		list.appendChild(button);
 		resultsList += '</li>';
+
 	}
 
 	resultsList += '</ol>';
+	
 	document.getElementById('results').innerHTML = resultsList;
+}
+*/
+
+function showGists(gist) { //create ordered list
+	var list = document.getElementById('list');
+	var languages = setFilteredLanguages();
+
+	for(var i=0; i < gist.length; i++) {
+		if(languages.indexOf(gist[i].language) >= 0) { //skip if language is filtered
+			continue;
+		}
+		if(gist[i].description === null || gist[i].description.length === 0) { //blank descriptions changes to 'No Description'
+			gist[i].description = 'No Description';
+		}
+		var entry = document.createElement('li');
+		var link = document.createElement('a');
+		link.appendChild(document.createTextNode(gist[i].description));
+		link.href = gist[i].url;
+		entry.appendChild(link);
+		list.appendChild(entry);
+
+		var button = document.createElement('button');
+		button.type = 'button';
+		button.appendChild(document.createTextNode('+'));
+		button.setAttribute('onclick', saveFavorite(gist[i].url, gist[i].description));
+		list.appendChild(button);
+	}
+}
+
+function saveFavorite(url, description) {
+	var a = {favorites: [url, description]};
+	//console.log(gist.description);
+	localStorage.setItem('session', JSON.stringify(a));
 }
