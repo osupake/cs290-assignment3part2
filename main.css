@@ -1,6 +1,10 @@
 fieldset {
 	display: inline-block;
-	width: 400px;
+	width: 40%;
+}
+
+body {
+	font-family: Verdana, sans-serif;
 }
 
 .button-align {
@@ -13,4 +17,19 @@ ul {
 
 ul li {
 	list-style: none;
+}
+
+#wrapper {
+	width: 80%;
+	margin: 0 auto;
+}
+
+#left {
+	float: left;
+	width: 50%;
+}
+
+#right {
+	float: right;
+	width: 50%;
 }

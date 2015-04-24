@@ -41,7 +41,7 @@ function addToArray(response) {
 		}
 		var newGist = new gist(description, url, language);
 		results.push(newGist);
-		console.log(results.length);
+		//console.log(results.length);
 	}
 	showGists(results);
 }
@@ -65,7 +65,7 @@ function setFilteredLanguages() { //create array of filtered languages
 }
 
 function showGists(gist) { //create ordered list
-	var list = document.getElementById('list');
+	
 	var languages = setFilteredLanguages();
 
 	for(var i=0; i < gist.length; i++) {
@@ -75,6 +75,7 @@ function showGists(gist) { //create ordered list
 		if(gist[i].description === null || gist[i].description.length === 0) { //blank descriptions changes to 'No Description'
 			gist[i].description = 'No Description';
 		}
+		var list = document.getElementById('list');
 		var entry = document.createElement('li');
 		var link = document.createElement('a');
 		link.appendChild(document.createTextNode(gist[i].description));
@@ -121,13 +122,13 @@ function buildFavoriteList(item) {
 	rmFave.type = 'button';
 	rmFave.appendChild(document.createTextNode('-'));
 	rmFave.onclick = function() {
-		console.log(item);
+		//console.log(item);
 		this.parentNode.removeChild(entry);
 		this.parentNode.removeChild(this);
 
 		var json = JSON.parse(localStorage["favorites"]);
 		for (var i=0; i<json.length; i++) {
-            if (json[i].url == item.url) {
+            if (json[i].url == item.url) { //delete if url matches
             	json.splice(i,1);
         	}
         }

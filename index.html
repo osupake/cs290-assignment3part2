@@ -6,34 +6,46 @@
 	<title>Eugene Pak | CS290 Assignment 3 - Part 2</title>
 </head>
 <body>
-	<fieldset>
-		<label>How many pages of results do you want to see? </label>
-		<p>
-		<select name="pages" id="pages">
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-		</select>
-		</p>
-		<label>Select languages to filter out:</label>
-		<ul>
-			<li><input type="checkbox" id="Python" value="Python">Python</li>
-			<li><input type="checkbox" id="JSON" value="JSON">JSON</li>
-			<li><input type="checkbox" id="JavaScript" value="JavaScript">JavaScript</li>
-			<li><input type="checkbox" id="SQL" value="SQL">SQL</li>
-		</ul>	
-		<div class="button-align">
-			<input type="submit" value="Search" onclick="startGists()">
-		</div>				
-	</fieldset>
-	<h2>Results</h2>
-	<div id="results"></div>
-	<ol id="list"></ol>
-	<h2>Favorites</h2>
-	<div id="displayFavorites"></div>
-	<ol id="favoriteList"></ol>
+	<div id="wrapper">
+		
+		<div id="top">
+			<fieldset>
+			<label>How many pages of results do you want to see? (30 results per page)</label>
+			<p>
+			<select name="pages" id="pages">
+				<option value="1">1</option>
+				<option value="2">2</option>
+				<option value="3">3</option>
+				<option value="4">4</option>
+				<option value="5">5</option>
+			</select>
+			</p>
+			<label>Select languages to filter out:</label>
+			<ul>
+				<li><input type="checkbox" id="Python" value="Python">Python</li>
+				<li><input type="checkbox" id="JSON" value="JSON">JSON</li>
+				<li><input type="checkbox" id="JavaScript" value="JavaScript">JavaScript</li>
+				<li><input type="checkbox" id="SQL" value="SQL">SQL</li>
+			</ul>	
+			<div class="button-align">
+				<input type="submit" value="Search" onclick="startGists()">
+			</div>				
+		</fieldset>
+		</div>
+
+		<div id="left">
+			<h2>Results</h2>
+			<div id="results"></div>
+			<ol id="list"></ol>
+		</div>
+
+		<div id="right">
+			<h2>Favorites</h2>
+			<ol id="favoriteList"></ol>
+			<div id="displayFavorites"></div>
+		</div>
+		
+	</div>
 	<script src="gist.js"></script>
 </body>
 </html>
