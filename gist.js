@@ -7,6 +7,7 @@ function gist(description, url, language) {
 }
 
 function startGists() {
+	document.getElementById('list').innerHTML = ""; //clear list on subsequent searches
 	var pages = 1;
 	var pageNum = document.getElementsByName('pages')[0].value;
 
@@ -65,7 +66,6 @@ function setFilteredLanguages() { //create array of filtered languages
 }
 
 function showGists(gist) { //create ordered list
-	
 	var languages = setFilteredLanguages();
 
 	for(var i=0; i < gist.length; i++) {
@@ -90,9 +90,11 @@ function showGists(gist) { //create ordered list
 		addFave.appendChild(document.createTextNode('+'));
 		addFave.onclick = function() {
 			saveFavorite(this.name, this.value);
+			var resultLi = this.previousSibling;
+			resultLi.parentNode.removeChild(resultLi);
+			this.parentNode.removeChild(this);
 		}
-		list.appendChild(addFave);
-		
+		list.appendChild(addFave);	
 	}
 
 }
@@ -133,7 +135,6 @@ function buildFavoriteList(item) {
         	}
         }
 		localStorage["favorites"] = JSON.stringify(json);
-
 	}
 	list.appendChild(rmFave);
 }
@@ -154,6 +155,7 @@ function listFavorites() {
 
 function clearFavorites() {
 	localStorage.clear();
+	document.getElementById('favoriteList').innerHTML = "";
 }
 
 window.onload = function() {
