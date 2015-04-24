@@ -9,7 +9,6 @@ function gist(description, url, language) {
 function startGists() {
 	var pages = 1;
 	var pageNum = document.getElementsByName('pages')[0].value;
-	var results = [];
 
 	for(var i=1; i <= pageNum; i++) {
 		var url = 'https://api.github.com/gists?page=' + pages + '&per_page=30';
@@ -19,26 +18,34 @@ function startGists() {
 				var response = JSON.parse(this.responseText);
 				//console.log(typeof response);
 				//console.log(response);
-				for (var i=0; i < response.length; i++) {
-					var description = response[i].description;
-					var url = response[i].html_url;
-					var language;
-					for(var property in response[i].files) {
-				    	var filesObject = response[i].files[property];
-				    	language = filesObject.language;
-				    	//console.log(language);
-				    }
-				    var newGist = new gist(description, url, language);
-					results.push(newGist);
-				}
-			}
-			showGists(results);
+				addToArray(response);
+			}	
 		}
+
 		xhr.open('GET', url);
 		xhr.send();
 		pages++
 	}
 }
+
+function addToArray(response) {
+	var results = [];
+	for (var i=0; i < response.length; i++) {
+		var description = response[i].description;
+		var url = response[i].html_url;
+		var language;
+		for(var property in response[i].files) {
+			var filesObject = response[i].files[property];
+			language = filesObject.language;
+			//console.log(language);
+		}
+		var newGist = new gist(description, url, language);
+		results.push(newGist);
+		console.log(results.length);
+	}
+	showGists(results);
+}
+
 
 function setFilteredLanguages() { //create array of filtered languages
 	var filteredLanguages = [];
@@ -74,16 +81,7 @@ function showGists(gist) { //create ordered list
 		link.href = gist[i].url;
 		entry.appendChild(link);
 		list.appendChild(entry);
-/*
-		var addFave = document.createElement('button');
-		addFave.type = 'button';
-		addFave.name = '<a href="' + link.href + '>' + gist[i].description + '</a>';
-		addFave.appendChild(document.createTextNode('+'));
-		addFave.onclick = function() {
-			saveFavorite(this.name);
-		}
-		list.appendChild(addFave);
-*/
+
 		var addFave = document.createElement('button');
 		addFave.type = 'button';
 		addFave.name = link.href
@@ -104,38 +102,60 @@ function faveItem(url, description) {
 }
 
 function saveFavorite(url, description) {
-	//console.log(link);
 	var newFave = new faveItem(url, description);
-	//faves.push(newGist);
 	faves.push(newFave);
 	localStorage.setItem('favorites', JSON.stringify(faves));
+	buildFavoriteList(newFave);
 }
 
-function listFavorites(faveArray) {
+function buildFavoriteList(item) {
 	var list = document.getElementById('favoriteList');
-	for(var i=0; i < faveArray.length; i++) {
-		var entry = document.createElement('li');
-		console.log(faveArray[i]);
-		var link = document.createElement('a');
-		link.appendChild(document.createTextNode(faveArray[i].description));
-		link.href = faveArray[i].url;
-		entry.appendChild(link);
-		list.appendChild(entry);
+	var entry = document.createElement('li');
+	var link = document.createElement('a');
+	link.appendChild(document.createTextNode(item.description));
+	link.href = item.url;
+	entry.appendChild(link);
+	list.appendChild(entry);
 
-		var rmFave = document.createElement('button');
-		rmFave.type = 'button';
-		rmFave.appendChild(document.createTextNode('-'));
-		rmFave.onclick = function() {
-			console.log(faveArray);
-			//this.parentNode.removeChild(entry);
-			//this.parentNode.removeChild(this);
+	var rmFave = document.createElement('button');
+	rmFave.type = 'button';
+	rmFave.appendChild(document.createTextNode('-'));
+	rmFave.onclick = function() {
+		console.log(item);
+		this.parentNode.removeChild(entry);
+		this.parentNode.removeChild(this);
+
+		var json = JSON.parse(localStorage["favorites"]);
+		for (var i=0; i<json.length; i++) {
+            if (json[i].url == item.url) {
+            	json.splice(i,1);
+        	}
+        }
+		localStorage["favorites"] = JSON.stringify(json);
+
 	}
 	list.appendChild(rmFave);
-	}
+}
+
+function listFavorites() {
+	var storedFavorites = localStorage.getItem('favorites');
+    var favorites;
+
+    if (storedFavorites === null) {
+        favorites = {};
+    } else {
+        favorites = JSON.parse(storedFavorites);
+        for(var i=0; i < favorites.length; i++) {
+        	buildFavoriteList(favorites[i]);
+        }
+    }
+}
+
+function clearFavorites() {
+	localStorage.clear();
 }
 
 window.onload = function() {
-	var faveArray= JSON.parse(localStorage.getItem('favorites'));
-	listFavorites(faveArray);
-	//document.getElementById('displayFavorites').innerHTML = faveArray[i];
+	listFavorites();
+	document.getElementById('displayFavorites').innerHTML = '<button onclick="clearFavorites()">Clear Favorites</button>';
 }
