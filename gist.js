@@ -1,5 +1,3 @@
-var faves = [];
-
 function gist(description, url, language) {
 	this.description = description;
 	this.url = url;
@@ -105,11 +103,24 @@ function faveItem(url, description) {
 }
 
 function saveFavorite(url, description) {
+	var storedFavorites = localStorage.getItem('favorites');
+    var favorites;
+    var favesArray = [];
+    if (storedFavorites === null) {
+        favesArray = [];
+    } else {
+        favorites = JSON.parse(storedFavorites);
+        for(var i=0; i < favorites.length; i++) {
+        	favesArray[i] = favorites[i];
+        }
+    }
 	var newFave = new faveItem(url, description);
-	faves.push(newFave);
-	localStorage.setItem('favorites', JSON.stringify(faves));
+	favesArray.push(newFave);
+	console.log(favesArray);
+	localStorage.setItem('favorites', JSON.stringify(favesArray));
 	buildFavoriteList(newFave);
 }
+
 
 function buildFavoriteList(item) {
 	var list = document.getElementById('favoriteList');
