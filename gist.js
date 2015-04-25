@@ -4,6 +4,11 @@ function gist(description, url, language) {
 	this.language = language;
 }
 
+function faveItem(url, description) {
+	this.url = url;
+	this.description = description;
+}
+
 function startGists() {
 	document.getElementById('list').innerHTML = ""; //clear list on subsequent searches
 	var pages = 1;
@@ -39,7 +44,7 @@ function addToArray(response) {
 			//console.log(language);
 		}
 		var newGist = new gist(description, url, language);
-		results.push(newGist);
+		results.push(newGist); //array with all gists
 		//console.log(results.length);
 	}
 	showGists(results);
@@ -81,7 +86,7 @@ function showGists(gist) { //create ordered list
 		entry.appendChild(link);
 		list.appendChild(entry);
 
-		var addFave = document.createElement('button');
+		var addFave = document.createElement('button'); //add favorite button
 		addFave.type = 'button';
 		addFave.name = link.href
 		addFave.value =  gist[i].description;
@@ -97,13 +102,8 @@ function showGists(gist) { //create ordered list
 
 }
 
-function faveItem(url, description) {
-	this.url = url;
-	this.description = description;
-}
-
 function saveFavorite(url, description) {
-	var storedFavorites = localStorage.getItem('favorites');
+	var storedFavorites = localStorage.getItem('favorites'); //get favorites from local storage
     var favorites;
     var favesArray = [];
     if (storedFavorites === null) {
@@ -111,12 +111,11 @@ function saveFavorite(url, description) {
     } else {
         favorites = JSON.parse(storedFavorites);
         for(var i=0; i < favorites.length; i++) {
-        	favesArray[i] = favorites[i];
+        	favesArray[i] = favorites[i]; //add to temp array
         }
     }
 	var newFave = new faveItem(url, description);
 	favesArray.push(newFave);
-	console.log(favesArray);
 	localStorage.setItem('favorites', JSON.stringify(favesArray));
 	buildFavoriteList(newFave);
 }
@@ -131,7 +130,7 @@ function buildFavoriteList(item) {
 	entry.appendChild(link);
 	list.appendChild(entry);
 
-	var rmFave = document.createElement('button');
+	var rmFave = document.createElement('button'); //remove favorite button
 	rmFave.type = 'button';
 	rmFave.appendChild(document.createTextNode('-'));
 	rmFave.onclick = function() {
