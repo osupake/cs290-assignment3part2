@@ -170,5 +170,4 @@ function clearFavorites() {
 
 window.onload = function() {
 	listFavorites();
-	document.getElementById('displayFavorites').innerHTML = '<button onclick="clearFavorites()">Clear Favorites</button>';
 }

@@ -7,7 +7,8 @@
 </head>
 <body>
 	<div id="wrapper">
-		
+		<header>
+		</header>
 		<div id="top">
 			<fieldset>
 			<label>How many pages of results do you want to see? (30 results per page)</label>
@@ -27,7 +28,7 @@
 				<li><input type="checkbox" id="JavaScript" value="JavaScript">JavaScript</li>
 				<li><input type="checkbox" id="SQL" value="SQL">SQL</li>
 			</ul>	
-			<div class="button-align">
+			<div class="center-align">
 				<input type="submit" value="Search" onclick="startGists()">
 			</div>				
 		</fieldset>
@@ -42,9 +43,13 @@
 		<div id="right">
 			<h2>Favorites</h2>
 			<ol id="favoriteList"></ol>
-			<div id="displayFavorites"></div>
+			<div class="center-align">
+				<input type="submit" value="Clear Favorites" onclick="clearFavorites()">
+			</div>	
 		</div>
-		
+		<div class="clear"></div>
+		<footer>
+		</footer>
 	</div>
 	<script src="gist.js"></script>
 </body>

@@ -2,13 +2,19 @@ fieldset {
 	display: inline-block;
 	width: 40%;
 	min-width: 230px;
+	margin-left: 0px;
+	margin-bottom: 20px;
 }
 
 body {
 	font-family: Verdana, sans-serif;
 }
 
-.button-align {
+h2 {
+	text-align: center;
+}
+
+.center-align {
 	text-align: center;
 }
 
@@ -20,17 +26,25 @@ ul li {
 	list-style: none;
 }
 
+ol li {
+	padding-top: 5px;
+}
+
 #wrapper {
-	width: 80%;
+	width: 960px;
 	margin: 0 auto;
 }
 
 #left {
 	float: left;
-	width: 50%;
+	width: 470px;
+	background-color: #e6e6e6;
+	min-height: 400px;
 }
 
 #right {
 	float: right;
-	width: 50%;
+	width: 470px;
+	background-color: #e6e6e6;
+	min-height: 400px;
 }
