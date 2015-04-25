@@ -1,0 +1,81 @@
+You log goes in this  file.
+
+Start: Sat, 25 Apr 2015 19:20:00 -0400
+End: Sat, 25 Apr 2015 19:32:50 -0400
+Tasks: added column colors and slight modifications to css
+
+Start: Sat, 25 Apr 2015 11:45:00 -0400
+End: Sat, 25 Apr 2015 12:02:26 -0400
+Tasks: updated styling in css
+
+Start: Sat, 25 Apr 2015 11:15:00 -0400
+End: Sat, 25 Apr 2015 11:26:48 -0400
+Tasks: cleaned up
+
+Start: Sat, 25 Apr 2015 01:30:00 -0400
+End: Sat, 25 Apr 2015 02:33:38 -0400
+Tasks: fixed bug where favorites are overwritten
+
+Start: Fri, 24 Apr 2015 17:30:00 -0400
+End: Fri, 24 Apr 2015 18:02:21 -0400
+Tasks: worked on favorites. adding favorite removes entries from results list.
+
+Start: Thu, 23 Apr 2015 21:40:00 -0400
+End: Thu, 23 Apr 2015 22:06:49 -0400
+Tasks: updated styling in css
+
+Start: Thu, 23 Apr 2015 18:30:00 -0400
+End: Thu, 23 Apr 2015 21:21:26 -0400
+Tasks: created separate function to add gists to array (fixed too many results displaying). implemented adding and removing favorites.
+
+Start: Thu, 23 Apr 2015 13:00:00 -0400
+End: Thu, 23 Apr 2015 17:14:50 -0400
+Tasks: worked on favorites, can add to local storage but not remove
+
+Start: Wed, 22 Apr 2015 21:00:00 -0400
+End: Wed, 22 Apr 2015 22:25:53 -0400
+Tasks: cleaned up gist object and added language filter
+
+Start: Wed, 22 Apr 2015 18:50:00 -0400
+End: Wed, 22 Apr 2015 19:26:38 -0400
+Tasks: removed global variable and fixed results displaying feature
+
+Start: Wed, 22 Apr 2015 16:30:00 -0400
+End: Wed, 22 Apr 2015 18:10:26 -0400
+Tasks: fixed feature to allow 1 to 5 pages of results to display
+
+Start: Wed, 22 Apr 2015 13:00:00 -0400
+End: Wed, 22 Apr 2015 15:57:29 -0400
+Tasks: receiving gists and adding into unordered list
+
+Start: Tue, 21 Apr 2015 19:30:00 -0400
+End: Tue, 21 Apr 2015 20:28:08 -0400
+Tasks: created gists.js
+
+Start: Tue, 21 Apr 2015 17:00:00 -0400
+End: Tue, 21 Apr 2015 17:16:15 -0400
+Tasks: created index.html and main.css
+
+Start:
+End: Tue, 21 Apr 2015 16:48:28 -0400
+Tasks: :tada: Added .gitattributes & .gitignore files
+
+Start: Mon, 20 Apr 2015 14:30:00 -0400
+End: Mon, 20 Apr 2015 17:43:10 -0400
+Tasks: finished functions.js and objects.js
+
+Start: Tue, 14 Apr 2015 19:30:00 -0400
+End: Tue, 14 Apr 2015 19:56:27 -0400
+Tasks: worked in functions.js and objects.js
+
+Start: Tue, 14 Apr 2015 18:00:00 -0400
+End: Tue, 14 Apr 2015 18:18:59 -0400
+Tasks: finished variables.js
+
+Start: Tue, 14 Apr 2015 13:56:00 -0400
+End: Tue, 14 Apr 2015 13:58:28 -0400
+Tasks: added uselessFunction
+
+Start:
+End: Tue, 14 Apr 2015 13:52:04 -0400
+Tasks: added assignment3 files
