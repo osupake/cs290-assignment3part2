@@ -26,6 +26,10 @@ ul li {
 	list-style: none;
 }
 
+ol {
+	padding-left: 50px;
+}
+
 ol li {
 	padding-top: 5px;
 }
